@@ -9,7 +9,6 @@ import AuthModel from '@app/resources/auth/schema';
 
 const getToken = async (req: NextRequest, res: NextApiResponse) => {
   const session = await getServerSession();
-  const data = await req.json();
 
   if (!session) {
     return apiResponse({ status: 401, message: 'NOT_AUTHORIZED' });
@@ -21,7 +20,6 @@ const getToken = async (req: NextRequest, res: NextApiResponse) => {
     // Check if user has correct role and email
     const auth = await AuthModel.findOne({
       email: user?.email,
-      roles: data.activeRole,
     });
 
     if (!auth) {
@@ -31,7 +29,6 @@ const getToken = async (req: NextRequest, res: NextApiResponse) => {
     const token = createToken({
       actionType: TokenActionTypes.AccessToken,
       id: auth._id,
-      activeRole: data.activeRole,
     });
 
     const response = apiResponse({ status: 200, message: 'OK' });
@@ -51,4 +48,4 @@ const getToken = async (req: NextRequest, res: NextApiResponse) => {
   }
 };
 
-export const POST = withDbConnection(getToken);
+export const GET = withDbConnection(getToken);

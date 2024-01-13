@@ -4,6 +4,7 @@ import AuthModel from '@app/resources/auth/schema';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
 import NAVIGATION from '@app/constants/navigation';
+import { login, register } from '@app/api/auth/route';
 
 export const authConfig: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -15,8 +16,7 @@ export const authConfig: AuthOptions = {
   },
   providers: [
     Credentials({
-      id: 'email-authentication',
-      name: 'Login with email and password',
+      name: 'Credentials',
       credentials: {
         email: {
           label: 'Email',
@@ -29,28 +29,50 @@ export const authConfig: AuthOptions = {
           placeholder: '******',
         },
       },
-      authorize: async (credentials, req) => {
+      authorize: async (credentials) => {
+        if (!credentials) return null;
+
+        console.log(credentials);
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials);
 
-        if (parsedCredentials.success) {
-          const { email, password } = parsedCredentials.data;
-          const auth = await AuthModel.findOne({ email });
-          if (!auth) return null;
-
-          const passwordsMatch = await bcrypt.compare(
-            password,
-            auth.passwordHash
+        if (!parsedCredentials.success) {
+          const validationErrors = parsedCredentials.error.issues.map(
+            (issue) => ({
+              path: issue.path.join('.'),
+              message: issue.message,
+            })
           );
 
-          if (passwordsMatch)
-            return {
-              ...auth,
-              id: auth.id,
-              email: auth.email,
-            };
+          console.log(validationErrors);
+
+          return null;
         }
+
+        const auth = await AuthModel.findOne({ email: credentials.email });
+
+        if (!auth) {
+          const registerAuth = await register(credentials);
+
+          if (!registerAuth) return null;
+
+          return {
+            ...registerAuth,
+            email: registerAuth.email,
+            id: registerAuth._id,
+          };
+        }
+
+        const loginAuth = await login(credentials);
+
+        if (!loginAuth) return null;
+
+        return {
+          ...loginAuth,
+          email: loginAuth.email,
+          id: loginAuth._id,
+        };
 
         return null;
       },

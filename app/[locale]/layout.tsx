@@ -9,6 +9,7 @@ import NextAuthSessionProvider from '@utils/providers/session-provider';
 import QueryProvider from '@utils/providers/react-query-provider';
 import Loading from './Loading';
 import { Toaster } from '@components/ui/toaster';
+import AppWrapper from '@components/general/AppWrapper';
 
 const inter = Inter({
   subsets: ['cyrillic', 'cyrillic-ext', 'latin', 'latin-ext', 'vietnamese'],
@@ -42,11 +43,11 @@ export async function generateMetadata({
   return {
     title: t('localeLayoutMeta.title'),
     description: t('localeLayoutMeta.description'),
-    manifest: 'favicon/site.webmanifest',
+    manifest: '/favicon/site.webmanifest',
     icons: {
-      apple: 'favicon/favicon-32x32.png',
-      icon: 'favicon/favicon-32x32.png',
-      shortcut: 'favicon/favicon-32x32.png',
+      apple: '/favicon/favicon-32x32.png',
+      icon: '/favicon/favicon-32x32.png',
+      shortcut: '/favicon/favicon-32x32.png',
     },
   };
 }
@@ -79,7 +80,9 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={translations}>
           <NextAuthSessionProvider session={session}>
             <QueryProvider>
-              <Suspense fallback={<Loading />}>{children}</Suspense>
+              <Suspense fallback={<Loading />}>
+                <AppWrapper>{children}</AppWrapper>
+              </Suspense>
             </QueryProvider>
           </NextAuthSessionProvider>
 

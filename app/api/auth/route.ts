@@ -33,30 +33,19 @@ const handleAuthentication = async (req: NextRequest, res: NextResponse) => {
   const auth = await AuthModel.findOne({ email: data.email });
 
   if (!auth) {
-    return register(data);
+    return onRegister(data);
   }
 
-  return login(data);
+  return onLogin(data);
 };
 
 export const POST = withDbConnection(handleAuthentication);
 
-const register = async ({ email, password }: ICredentials) => {
+const onRegister = async (credentials: ICredentials) => {
   try {
-    const passwordHash = await bcrypt.hash(password, 10);
+    const auth = await register(credentials);
 
-    // Create user
-    const user = await UserModel.create({
-      email,
-      roles: [USER_ROLES.USER],
-    });
-
-    // Create auth
-    const auth = await AuthModel.create({
-      email,
-      passwordHash,
-      user: user._id,
-    });
+    if (!auth) return null;
 
     const token = createToken({
       actionType: TokenActionTypes.AccessToken,
@@ -79,18 +68,32 @@ const register = async ({ email, password }: ICredentials) => {
   }
 };
 
-const login = async ({ email, password }: ICredentials) => {
+export const register = async ({ email, password }: ICredentials) => {
   try {
-    const auth = await AuthModel.findOne({ email }).populate('user');
-    if (!auth) {
-      return apiResponse({ status: 401, message: 'AUTHENTICATION_FAILED' });
-    }
+    const passwordHash = await bcrypt.hash(password, 10);
 
-    // Check if the password matches
-    const isPasswordValid = await bcrypt.compare(password, auth.passwordHash);
-    if (!isPasswordValid) {
-      return apiResponse({ status: 401, message: 'INVALID_CREDENTIAL' });
-    }
+    // Create user
+    const user = await UserModel.create({
+      email,
+      roles: [USER_ROLES.USER, USER_ROLES.ORGANIZER],
+    });
+
+    return AuthModel.create({
+      email,
+      passwordHash,
+      user: user._id,
+    });
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+const onLogin = async (credentials: ICredentials) => {
+  try {
+    const auth = await login(credentials);
+
+    if (!auth) return null;
 
     // Create token
     const token = createToken({
@@ -102,7 +105,6 @@ const login = async ({ email, password }: ICredentials) => {
     const response = apiResponse({
       status: 200,
       message: 'SUCCESS',
-      data: { user: auth.user },
     });
     response.cookies.set('x-access-token', token, {
       httpOnly: true,
@@ -116,5 +118,26 @@ const login = async ({ email, password }: ICredentials) => {
   } catch (error) {
     console.error(error);
     return apiResponse({ status: 500, message: 'SERVER_ERROR' });
+  }
+};
+
+export const login = async ({ email, password }: ICredentials) => {
+  try {
+    const auth = await AuthModel.findOne({ email });
+
+    if (!auth) {
+      return null;
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, auth.passwordHash);
+
+    if (!isPasswordValid) {
+      return null;
+    }
+
+    return auth;
+  } catch (error) {
+    console.error(error);
+    return null;
   }
 };

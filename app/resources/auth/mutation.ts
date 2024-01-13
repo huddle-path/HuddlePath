@@ -1,13 +1,16 @@
-import { IHttpResponse } from '@app/handlers/api-response/types';
 import { useMutation } from 'react-query';
 import { ICredentials } from './types';
-import { apiHttp } from '@lib/axiosConfig';
 import { queryClient } from '@lib/queryConfig';
 import { authQueryKeys } from './queries';
+import { signIn } from 'next-auth/react';
+import NAVIGATION from '@app/constants/navigation';
 
 async function loginOrRegister(credentials: ICredentials) {
-  const res = await apiHttp.post<IHttpResponse<boolean>>('/auth', credentials);
-  return res.data.data;
+  return signIn('credentials', {
+    ...credentials,
+    redirect: true,
+    callbackUrl: NAVIGATION.DASHBOARD,
+  });
 }
 
 export const useLoginOrRegister = () => {

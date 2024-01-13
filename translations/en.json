@@ -49,5 +49,6 @@
     "genericError": "An error occurred. Please try again later.",
     "invalidEmail": "Invalid email address",
     "passwordMin": "Password must be at least 6 characters long"
-  }
+  },
+  "sidebarMenus": {}
 }

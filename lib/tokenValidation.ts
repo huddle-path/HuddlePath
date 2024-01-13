@@ -1,6 +1,5 @@
-import { JsonWebTokenError, VerifyErrors } from 'jsonwebtoken';
+import { JsonWebTokenError } from 'jsonwebtoken';
 import { verifyToken } from '@app/handlers/token/handlers';
-import { IToken } from '@app/handlers/token/types';
 import AuthModel from '@app/resources/auth/schema';
 import { USER_ROLES_TYPE } from '@app/resources/user/types';
 import { NextRequest } from '@next';
@@ -23,7 +22,6 @@ export default async function tokenValidation(req: NextRequest) {
 
       const auth = await AuthModel.findOne({
         _id: payload.id,
-        roles: payload.activeRole,
       })
         .populate([
           {
@@ -39,7 +37,6 @@ export default async function tokenValidation(req: NextRequest) {
 
       req.auth = auth;
       req.activeRole = queryRole;
-      req.activeRole = payload.activeRole as USER_ROLES_TYPE;
 
       return {
         auth,

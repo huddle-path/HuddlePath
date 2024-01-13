@@ -89,4 +89,18 @@ export const Icons = {
       <path d='M21 12a9 9 0 1 1-6.219-8.56' />
     </svg>
   ),
+  chevronLeft: (props: IconProps) => (
+    <svg
+      stroke='currentColor'
+      fill='currentColor'
+      stroke-width='0'
+      viewBox='0 0 24 24'
+      height='200px'
+      width='200px'
+      xmlns='http://www.w3.org/2000/svg'
+      {...props}
+    >
+      <path d='M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z'></path>
+    </svg>
+  ),
 };

@@ -28,7 +28,7 @@ export enum USER_ROLES {
   SPEAKER = 'Speaker',
 
   /**
-   * Event sponsor or supporter
+   * Event sponsor
    */
   SPONSOR = 'Sponsor',
 }
