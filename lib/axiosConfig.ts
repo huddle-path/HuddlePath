@@ -3,7 +3,7 @@ import { useQueryClient } from 'react-query';
 import axios from 'axios';
 
 export const apiHttp = axios.create({
-  baseURL: 'api',
+  baseURL: '/api',
 });
 
 const useAxiosConfig = () => {

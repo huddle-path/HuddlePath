@@ -10,14 +10,13 @@ const Model = new Schema<IAuth>(
       unique: true,
       trim: true,
     },
-    roles: {
-      type: [String],
-      enum: USER_ROLES,
-      required: true,
-    },
     user: {
       type: Schema.Types.ObjectId,
       ref: 'User',
+      required: true,
+    },
+    passwordHash: {
+      type: String,
       required: true,
     },
   },

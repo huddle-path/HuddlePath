@@ -2,9 +2,12 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import '@styles/globals.css';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { NextIntlClientProvider, createTranslator } from 'next-intl';
 import { LOCALE_PROPS } from '../constants/translation';
+import NextAuthSessionProvider from '@utils/providers/session-provider';
+import QueryProvider from '@utils/providers/react-query-provider';
+import Loading from './Loading';
 
 const inter = Inter({
   subsets: ['cyrillic', 'cyrillic-ext', 'latin', 'latin-ext', 'vietnamese'],
@@ -50,9 +53,11 @@ export async function generateMetadata({
 export default async function RootLayout({
   children,
   params: { locale },
+  session,
 }: {
   children: React.ReactNode;
   params: { locale: string };
+  session: any;
 }) {
   console.log({ locale });
 
@@ -71,7 +76,11 @@ export default async function RootLayout({
     >
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={translations}>
-          {children}
+          <NextAuthSessionProvider session={session}>
+            <QueryProvider>
+              <Suspense fallback={<Loading />}>{children}</Suspense>
+            </QueryProvider>
+          </NextAuthSessionProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -3,8 +3,13 @@ import Credentials from 'next-auth/providers/credentials';
 import AuthModel from '@app/resources/auth/schema';
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
+import NAVIGATION from '@app/constants/navigation';
 
 export const authConfig: AuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: NAVIGATION.SIGN_IN,
+  },
   session: {
     strategy: 'jwt',
   },
@@ -51,47 +56,4 @@ export const authConfig: AuthOptions = {
       },
     }),
   ],
-  callbacks: {
-    async signIn({ credentials }) {
-      console.log({ credentials });
-
-      try {
-        let auth = credentials;
-        let user;
-
-        const _profile = credentials as any;
-
-        // const email = credentials?.email;
-        // auth = await AuthModel.findOne({ email }).populate({ path: 'user' });
-        // user = auth?.user;
-
-        // if (!auth) {
-        //   // Create a new user
-        //   const firstName = _profile?.given_name;
-        //   const lastName = _profile?.family_name;
-        //   const profilePhoto = _profile?.picture;
-        //   const roles = [USER_ROLES.USER];
-
-        //   user = await UserModel.create({
-        //     firstName,
-        //     lastName,
-        //     profilePhoto,
-        //     email,
-        //     roles,
-        //   });
-
-        //   auth = await AuthModel.create({
-        //     email,
-        //     user: user._id,
-        //     roles,
-        //   });
-        // }
-
-        return Promise.resolve(true);
-      } catch (error) {
-        console.log(error);
-        return Promise.resolve(false);
-      }
-    },
-  },
 };

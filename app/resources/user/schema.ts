@@ -10,11 +10,9 @@ const Model = new Schema<IUser>(
     },
     firstName: {
       type: String,
-      required: true,
     },
     lastName: {
       type: String,
-      required: true,
     },
     profilePhoto: {
       type: String,

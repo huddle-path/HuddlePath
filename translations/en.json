@@ -1,6 +1,6 @@
 {
   "localeLayoutMeta": {
-    "title": "Huddle Path",
+    "title": "HuddlePath - Connect, Collaborate, Innovate",
     "description": "Your innovative networking platform connecting students, educational institutions, and startups."
   },
   "header": {
@@ -28,5 +28,23 @@
     "upcoming": "Upcoming",
     "explore": "Explore upcoming events",
     "viewAllEvents": "View all events"
+  },
+  "authentication": {
+    "title": "Register / Login to your account",
+    "description": "Authentication forms built using the components.",
+    "emailLabel": "Enter your email below to create your account",
+    "continueText": "By clicking continue, you agree to our",
+    "termsLink": "Terms of Service",
+    "privacyLink": "Privacy Policy",
+    "localeLayoutMeta": {
+      "title": "HuddlePath - Register / Login to your account",
+      "description": "Create your HuddlePath account and join our vibrant community."
+    },
+    "welcome": "Welcome",
+    "authenticationSuccessful": "Authentication successful"
+  },
+  "errors": {
+    "error": "Error ocurred",
+    "genericError": "An error occurred. Please try again later."
   }
 }

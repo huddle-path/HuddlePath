@@ -1,29 +1,21 @@
-import Image from 'next/image';
-import React, { useMemo } from 'react';
-import Logo from '@public/logo-white.svg';
+'use client';
+import React from 'react';
 import Link from 'next/link';
 import NAVIGATION from '@app/constants/navigation';
 import { TbArrowUpRight } from 'react-icons/tb';
 import { useTranslations } from 'next-intl';
+import Logo from '@components/Logo/Logo';
 
 export const Header = () => {
   const t = useTranslations('header');
-  const createEventRoute = useMemo(() => {
-    return NAVIGATION.CREATE_EVENT;
-  }, []);
 
   return (
     <div className='flex flex-row justify-between text-white items-center'>
-      <Link href='/'>
-        <div className='flex flex-row gap-2'>
-          <Image src={Logo} alt='Huddlepath logo' className='w-6' />
-          <p className='text-white font-bold'>HuddlePath</p>
-        </div>
-      </Link>
+      <Logo />
 
       <div className='lg:pr-4'>
         <Link
-          href={createEventRoute}
+          href={NAVIGATION.CREATE_EVENT}
           className='flex flex-row items-center border px-4 py-2'
         >
           <TbArrowUpRight className='text-huddlepath-orange font-bold' />
