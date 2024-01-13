@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Huddlepath
+
+## Introduction
+Welcome to Huddlepath, the innovative networking platform that connects students, educational institutions, and startups. Huddlepath facilitates dynamic pitch sessions, offering a unique space for collaboration, learning, and professional growth.
+
+## Features
+- **Interactive Pitch Sessions:** Startups present their ideas to students and educators.
+- **Q&A Rounds:** Engage with presenters through insightful question-and-answer segments.
+- **Networking Opportunities:** Connect with like-minded individuals and professionals.
+- **Resource Sharing:** Access valuable insights, tips, and industry knowledge.
+- **Virtual and In-Person Events:** Participate from anywhere or join local events.
+
+## Technical Overview
+- **Frontend:** Developed using Next.js for a responsive, user-friendly interface.
+- **Backend:** Secure user authentication and data management.
+- **Database:** MongoDB/SQL for robust data storage.
+- **APIs:** Integration of third-party APIs for additional functionalities.
 
 ## Getting Started
+To start using Huddlepath:
+1. Visit [huddlepath.com](#) (Link will be active soon)
+2. Register as a student, educator, or startup.
+3. Explore events and join sessions that interest you.
 
-First, run the development server:
+## Getting the Code
+To get started with the Huddlepath codebase, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Prerequisites
+- Make sure you have Node.js and npm installed on your system.
+- A working knowledge of React and Next.js is beneficial for understanding the codebase.
+
+### Cloning the Repository
+To get started with the Huddlepath codebase, you can clone the repository to your local machine using the following Git command:
+
+```sh
+git clone https://github.com/your-username/huddlepath.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```sh
+npm run dev
+```

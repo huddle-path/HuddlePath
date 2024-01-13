@@ -1,0 +1,10 @@
+.weBringTogether span:nth-child(1) {
+  color: #fb792a;
+}
+
+.weBringTogether span:nth-child(2) {
+  color: #5cbfb0;
+}
+.weBringTogether span:nth-child(3) {
+  color: #0c506d;
+}

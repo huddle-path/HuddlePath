@@ -1,0 +1,32 @@
+{
+  "localeLayoutMeta": {
+    "title": "Huddle Path",
+    "description": "Your innovative networking platform connecting students, educational institutions, and startups."
+  },
+  "header": {
+    "createEvent": "Create Event"
+  },
+  "home": {
+    "whatWeOffer": "Discover what we are",
+    "weBringTogether": "We bring together <span>students</span> _ educational institutions _ <span>startups</span> _ accelerators _ thought leaders & <span>you</span> to envision the future.",
+    "inclusions": {
+      "student": "Student",
+      "studentDescription": "Networking opportunities: Attend events and connect with peers.",
+      "institution": "Institutions",
+      "institutionDescription": "Knowledge exchange: Collaborate with educational partners.",
+      "startup": "Startups",
+      "startupDescription": "Innovation hub: Join the startup ecosystem and foster creativity.",
+      "accelerator": "Accelerators",
+      "acceleratorDescription": "Business growth: Access resources and support for startups.",
+      "thoughtLeaders": "Leaders",
+      "thoughtLeadersDescription": "Ideas and insights: Engage with industry experts.",
+      "you": "You",
+      "youDescription": "Be a part of the future: Shape your journey with us."
+    }
+  },
+  "events": {
+    "upcoming": "Upcoming",
+    "explore": "Explore upcoming events",
+    "viewAllEvents": "View all events"
+  }
+}
