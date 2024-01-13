@@ -41,10 +41,13 @@
       "description": "Create your HuddlePath account and join our vibrant community."
     },
     "welcome": "Welcome",
-    "authenticationSuccessful": "Authentication successful"
+    "authenticationSuccessful": "Authentication successful",
+    "loginOrRegister": "Login or Register an account"
   },
   "errors": {
     "error": "Error ocurred",
-    "genericError": "An error occurred. Please try again later."
+    "genericError": "An error occurred. Please try again later.",
+    "invalidEmail": "Invalid email address",
+    "passwordMin": "Password must be at least 6 characters long"
   }
 }

@@ -8,6 +8,7 @@ import { LOCALE_PROPS } from '../constants/translation';
 import NextAuthSessionProvider from '@utils/providers/session-provider';
 import QueryProvider from '@utils/providers/react-query-provider';
 import Loading from './Loading';
+import { Toaster } from '@components/ui/toaster';
 
 const inter = Inter({
   subsets: ['cyrillic', 'cyrillic-ext', 'latin', 'latin-ext', 'vietnamese'],
@@ -81,6 +82,8 @@ export default async function RootLayout({
               <Suspense fallback={<Loading />}>{children}</Suspense>
             </QueryProvider>
           </NextAuthSessionProvider>
+
+          <Toaster />
         </NextIntlClientProvider>
       </body>
     </html>
