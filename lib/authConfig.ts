@@ -32,7 +32,6 @@ export const authConfig: AuthOptions = {
       authorize: async (credentials) => {
         if (!credentials) return null;
 
-        console.log(credentials);
         const parsedCredentials = z
           .object({ email: z.string().email(), password: z.string().min(6) })
           .safeParse(credentials);

@@ -50,5 +50,8 @@
     "invalidEmail": "Invalid email address",
     "passwordMin": "Password must be at least 6 characters long"
   },
-  "sidebarMenus": {}
+  "sidebarMenus": {
+    "dashboard": "Dashboard",
+    "events": "Events"
+  }
 }

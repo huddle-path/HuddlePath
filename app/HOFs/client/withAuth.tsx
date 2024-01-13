@@ -7,7 +7,6 @@ function withAuth(Component: ComponentType) {
   return function ProtectedRoute(props: React.JSX.IntrinsicAttributes) {
     const { data, status } = useSession();
 
-    console.log({ status, data });
     const router = useRouter();
 
     useEffect(() => {

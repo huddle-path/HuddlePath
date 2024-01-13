@@ -4,10 +4,6 @@ export interface IAuth {
   email: string;
   passwordHash: string;
   user: IUser;
-  /**
-   * THIS IS GENERATED ON DEMAND. ITS NEVER SAVED!
-   */
-  accessToken: string;
   _id: string;
   createdAt: string;
   updatedAt: string;

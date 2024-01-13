@@ -6,42 +6,40 @@ import { apiHttp } from '@lib/axiosConfig';
 
 export const authQueryKeys = {
   all: [{ scope: 'auth' }] as const,
-  activeRole: (role: USER_ROLES_TYPE) =>
-    [{ ...authQueryKeys.all[0], entity: 'role', role }] as const,
+  activeRole: () => [{ ...authQueryKeys.all[0], entity: 'role' }] as const,
   token: () => [{ ...authQueryKeys.all[0], entity: 'token' }] as const,
 };
 
-async function getAccessToken(): Promise<boolean> {
+async function getActiveRole(): Promise<USER_ROLES_TYPE> {
   try {
-    const res = await apiHttp.get<IHttpResponse<true>>(`/token`);
-    return res.data.data !== undefined;
-  } catch (error) {
-    console.error(error);
-    return false;
+    const res = await apiHttp.get<IHttpResponse<USER_ROLES_TYPE>>(`/auth/role`);
+    return res.data.data;
+  } catch (error: any) {
+    return error;
   }
 }
 
-export const useGetAccessToken = <
-  SelectReturnType = boolean,
+export const useGetActiveRole = <
+  SelectReturnType = USER_ROLES_TYPE,
   ErrorType = unknown
 >(
   options?: Partial<
     UseQueryOptions<
-      boolean,
+      USER_ROLES_TYPE,
       ErrorType,
       SelectReturnType,
-      ReturnType<(typeof authQueryKeys)['token']>
+      ReturnType<(typeof authQueryKeys)['activeRole']>
     >
   >
 ) => {
   return useQuery<
-    boolean,
+    USER_ROLES_TYPE,
     ErrorType,
     SelectReturnType,
-    ReturnType<(typeof authQueryKeys)['token']>
+    ReturnType<(typeof authQueryKeys)['activeRole']>
   >({
-    queryFn: () => getAccessToken(),
-    queryKey: authQueryKeys.token(),
+    queryFn: () => getActiveRole(),
+    queryKey: authQueryKeys.activeRole(),
     staleTime: DURATIONS.thirtyMins,
     refetchInterval: DURATIONS.thirtyMins,
     ...options,

@@ -61,7 +61,6 @@ export default async function RootLayout({
   params: { locale: string };
   session: any;
 }) {
-  console.log({ locale });
 
   let translations;
 
