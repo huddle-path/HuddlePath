@@ -2,8 +2,8 @@ import { IHttpResponse } from '@app/handlers/api-response/types';
 import { useMutation } from 'react-query';
 import { apiHttp } from '@lib/axiosConfig';
 import { queryClient } from '@lib/queryConfig';
-import { authQueryKeys } from '../auth/queries';
 import { IEvent, TUpsertEvent } from './types';
+import { eventQueryKeys } from './queries';
 
 async function createEvent(event: TUpsertEvent) {
   const res = await apiHttp.post<IHttpResponse<IEvent>>('/events', event);
@@ -23,7 +23,7 @@ export const useCreateEvent = () => {
     mutationFn: createEvent,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: authQueryKeys.all,
+        queryKey: eventQueryKeys.all,
       });
     },
   });
@@ -34,7 +34,7 @@ export const useUpdateEvent = () => {
     mutationFn: updateEvent,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: authQueryKeys.all,
+        queryKey: eventQueryKeys.all,
       });
     },
   });

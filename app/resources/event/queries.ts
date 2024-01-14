@@ -3,7 +3,11 @@ import {
   IHttpResponse,
   IQueryResponse,
 } from '@app/handlers/api-response/types';
-import { QueryFunctionContext, UseInfiniteQueryOptions, useInfiniteQuery } from 'react-query';
+import {
+  QueryFunctionContext,
+  UseInfiniteQueryOptions,
+  useInfiniteQuery,
+} from 'react-query';
 import { apiHttp } from '@lib/axiosConfig';
 import { IEvent, TEventQuery } from './types';
 
@@ -29,13 +33,31 @@ export const eventQueryKeys = {
 
 const fetchEvents = async ({
   pageParam = 1,
-  queryKey: [{}],
+  queryKey: [{ createdBy, search_value, sort_by, limit }],
 }: QueryFunctionContext<
   ReturnType<typeof eventQueryKeys.events>,
   number
 >): Promise<IQueryResponse<IEvent>> => {
+  const params: Record<string, any> = {
+    sort_by,
+    page: pageParam,
+    search_value,
+    limit,
+    createdBy,
+  };
+
+  // Remove fields with null values
+  Object.keys(params).forEach((key) => {
+    if (!params[key]) {
+      delete params[key];
+    }
+  });
+
   const response = await apiHttp.get<IHttpResponse<IQueryResponse<IEvent>>>(
-    `/event?page=${pageParam}`
+    `/events`,
+    {
+      params,
+    }
   );
 
   return response.data.data;

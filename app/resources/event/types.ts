@@ -12,7 +12,7 @@ export interface IEvent {
 
   title: string;
   description: string;
-  date: Date;
+  date: string;
   location: string;
   imageUrl: string;
   tag: 'Conference';
@@ -24,5 +24,7 @@ export type TUpsertEvent = Omit<
 >;
 
 export type TEventQuery = Partial<
-  IQuery<Omit<IEvent, 'sponsors' | 'attendees'>>
->;
+  IQuery<Omit<IEvent, 'sponsors' | 'attendees' | 'createdBy'>>
+> & {
+  createdBy?: string;
+};

@@ -10,7 +10,7 @@ const AppHeader = () => {
 
   const LINKS = [
     {
-      href: NAVIGATION.EVENTS,
+      href: NAVIGATION.EXPLORE_EVENTS,
       label: t('explore'),
       color: 'text-huddlepath-cyan',
     },

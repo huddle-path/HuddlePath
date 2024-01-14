@@ -78,6 +78,7 @@
     "selectDate": "Select a date",
     "savedSuccessfully": "Save successfully",
     "eventSavedSuccessfully": "Event has been save successfully",
-    "imageIsRequired": "Please upload an image"
+    "imageIsRequired": "Please upload an image",
+    "readMore": "Read more"
   }
 }

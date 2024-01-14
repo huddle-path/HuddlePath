@@ -6,7 +6,7 @@ import { Instances, Instance, Environment } from '@react-three/drei';
 import { EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing';
 import COLORS from '@app/constants/color';
 
-const particles = Array.from({ length: 50 }, () => ({
+const particles = Array.from({ length: 30 }, () => ({
   factor: MathUtils.randInt(20, 100),
   speed: MathUtils.randFloat(0.01, 0.75),
   xFactor: MathUtils.randFloatSpread(40),
@@ -29,7 +29,7 @@ export const HeroCanvasAnimation: React.FC = () => {
       <Bubbles />
       <EffectComposer disableNormalPass>
         <N8AO aoRadius={6} intensity={20} color={COLORS.orange} />
-        <TiltShift2 blur={1} />
+        <TiltShift2 blur={0.2} />
       </EffectComposer>
       <Environment preset='city' />
     </Canvas>

@@ -95,7 +95,7 @@ const postEvent = async (req: NextRequest, res: NextResponse) => {
     }
 
     const event = await EventModel.create({
-      createdBy: req.auth._id,
+      createdBy: req.auth.user._id,
       ...parsedCredentials.data,
     });
 
