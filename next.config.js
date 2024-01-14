@@ -12,7 +12,4 @@ module.exports = withNextIntl({
     register: true,
     skipWaiting: true,
   }),
-  experimental: {
-    serverActions: true,
-  },
 });

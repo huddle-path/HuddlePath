@@ -6,7 +6,9 @@ import {
 import {
   QueryFunctionContext,
   UseInfiniteQueryOptions,
+  UseQueryOptions,
   useInfiniteQuery,
+  useQuery,
 } from 'react-query';
 import { apiHttp } from '@lib/axiosConfig';
 import { IEvent, TEventQuery } from './types';
@@ -31,7 +33,7 @@ export const eventQueryKeys = {
     ] as const,
 };
 
-const fetchEvents = async ({
+export const fetchEvents = async ({
   pageParam = 1,
   queryKey: [{ createdBy, search_value, sort_by, limit }],
 }: QueryFunctionContext<
@@ -63,6 +65,16 @@ const fetchEvents = async ({
   return response.data.data;
 };
 
+export async function fetchEvent({
+  queryKey: [{ eventId }],
+}: QueryFunctionContext<ReturnType<(typeof eventQueryKeys)['event']>>) {
+  if (!eventId) {
+    return null;
+  }
+  const res = await apiHttp.get<IHttpResponse<IEvent>>('events/' + eventId);
+  return res.data.data;
+}
+
 export const useGetEvents = <
   SelectData = IQueryResponse<IEvent>,
   Error = unknown
@@ -88,6 +100,26 @@ export const useGetEvents = <
       }
       return undefined;
     },
+    staleTime: DURATIONS.fifteenMins,
+    ...options,
+  });
+};
+
+export const useGetEvent = <SelectReturnType = IEvent, ErrorType = unknown>(
+  { eventId }: { eventId?: string },
+  options?: UseQueryOptions<
+    IEvent | null,
+    ErrorType,
+    SelectReturnType,
+    ReturnType<(typeof eventQueryKeys)['event']>
+  >
+) => {
+  return useQuery<
+    IEvent | null,
+    ErrorType,
+    SelectReturnType,
+    ReturnType<(typeof eventQueryKeys)['event']>
+  >(eventQueryKeys.event(eventId), fetchEvent, {
     staleTime: DURATIONS.fifteenMins,
     ...options,
   });

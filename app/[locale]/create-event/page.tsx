@@ -10,6 +10,7 @@ import { Input } from '@components/ui/input';
 import { Textarea } from '@components/ui/textarea';
 import { toast } from '@components/ui/use-toast';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -17,6 +18,8 @@ import { useForm } from 'react-hook-form';
 const CreateEvent = () => {
   const { push } = useRouter();
   const t = useTranslations('general');
+  const headerT = useTranslations('header');
+
   const translationErrors = useTranslations('errors');
   const [imagePreview, setImagePreview] = useState<string>();
   const [imageSelected, setImageSelected] = useState<boolean>(true);
@@ -86,6 +89,11 @@ const CreateEvent = () => {
       <AppHeader />
 
       <div className='container mx-auto p-4 h-full max-w-screen-md'>
+        <div className='flex flex-row text-sm gap-4 mb-4'>
+          <Link href={NAVIGATION.DASHBOARD} className='hover:underline'>{headerT('myAccount')}</Link>
+          <p>/</p>
+          <p>{headerT('createEvent')}</p>
+        </div>
         <h1 className='text-2xl lg:text-4xl font-bold mb-4'>
           {t('createEvent')}
         </h1>

@@ -7,6 +7,7 @@ import EventModel from '@app/resources/event/schema';
 import { NextRequest } from '@next';
 import { IEvent, TEventQuery } from '@app/resources/event/types';
 import { IQuery } from '@app/handlers/api-response/types';
+import { splitHelperAndObjectify } from '@lib/utils';
 
 const eventFormatter = (query: IQuery<TEventQuery>) => {
   const filter: any = {};
@@ -20,6 +21,12 @@ const eventFormatter = (query: IQuery<TEventQuery>) => {
         },
       },
     ];
+  }
+
+  if (query.createdBy) {
+    filter.createdBy = splitHelperAndObjectify(
+      query.createdBy as unknown as string
+    );
   }
 
   return filter;
@@ -113,7 +120,7 @@ const postEvent = async (req: NextRequest, res: NextResponse) => {
   }
 };
 
-const GET = withDbConnection(withAuthentication(getAllEvents));
+const GET = withDbConnection(getAllEvents);
 const POST = withDbConnection(withAuthentication(postEvent));
 
 export { GET, POST };
