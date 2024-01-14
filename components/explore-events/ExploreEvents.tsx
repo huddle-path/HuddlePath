@@ -47,7 +47,9 @@ export const ExploreEvents = () => {
           {Array(4)
             .fill(0)
             .map(() => (
-              <EventSkeleton />
+              <div key={Date.now() + crypto.randomUUID()}>
+                <EventSkeleton />
+              </div>
             ))}
         </div>
       )}

@@ -13,13 +13,13 @@ import { IoIosAdd } from 'react-icons/io';
 
 const Dashboard = () => {
   const t = useTranslations('general');
-  const { data: user } = useGetLoggedInUser();
+  const { data: user } = useGetLoggedInUser({});
   const { data: eventData, isLoading } = useGetEvents(
     {
       limit: 4,
       createdBy: user?._id as string,
     },
-    { enabled: Boolean(user), suspense: true }
+    { enabled: Boolean(user) }
   );
 
   const events = useMemo(() => {
@@ -60,7 +60,9 @@ const Dashboard = () => {
                 {Array(2)
                   .fill(1)
                   .map(() => (
-                    <EventSkeleton key={Date.now() + crypto.randomUUID()} />
+                    <div key={Date.now() + crypto.randomUUID()}>
+                      <EventSkeleton />
+                    </div>
                   ))}
               </>
             )}

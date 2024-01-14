@@ -26,6 +26,7 @@ const Event = (event: IEvent) => {
           className='w-80 h-60 object-cover'
           width={80}
           height={80}
+          loading='lazy'
         />
       </div>
 
@@ -36,13 +37,10 @@ const Event = (event: IEvent) => {
       </div>
 
       <div className='mt-4'>
-        <Link
-          href={`${NAVIGATION.EXPLORE_EVENTS}/${event._id}`}
-          className='flex flex-row items-center w-fit'
-        >
+        <div className='flex flex-row items-center w-fit'>
           <TbArrowUpRight className='text-huddlepath-orange font-bold' />
           <p className='text-sm'>{t('readMore')}</p>
-        </Link>
+        </div>
       </div>
     </Link>
   );

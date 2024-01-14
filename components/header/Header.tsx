@@ -6,12 +6,15 @@ import { TbArrowUpRight } from 'react-icons/tb';
 import Logo from '@components/Logo/Logo';
 import { useTranslations } from 'next-intl';
 
-export const Header = () => {
+export const Header = ({ useBlack }: { useBlack: boolean }) => {
   const t = useTranslations('header');
 
   return (
-    <div className='flex flex-row justify-between text-white items-center'>
-      <Logo />
+    <div className='transition-all flex flex-row justify-between text-white items-center'>
+      <Logo
+        useBlackLogo={useBlack ? true : false}
+        textClasses={useBlack ? 'text-black' : 'text-white'}
+      />
 
       <div className='lg:pr-4'>
         <Link
@@ -19,7 +22,9 @@ export const Header = () => {
           className='flex flex-row items-center border px-4 py-2'
         >
           <TbArrowUpRight className='text-huddlepath-orange font-bold' />
-          <p className='text-sm'>{t('myAccount')}</p>
+          <p className={`text-sm ${useBlack ? 'text-black' : 'text-white'}`}>
+            {t('myAccount')}
+          </p>
         </Link>
       </div>
     </div>

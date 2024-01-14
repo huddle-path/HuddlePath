@@ -79,6 +79,9 @@
     "savedSuccessfully": "Save successfully",
     "eventSavedSuccessfully": "Event has been save successfully",
     "imageIsRequired": "Please upload an image",
-    "readMore": "Read more"
+    "readMore": "Read more",
+    "connect": "Connect",
+    "collaborate": "Collaborate",
+    "innovate": "Innovate"
   }
 }

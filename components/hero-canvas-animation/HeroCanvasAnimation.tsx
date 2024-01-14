@@ -1,10 +1,11 @@
 'use client';
 import { MathUtils } from 'three';
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Instances, Instance, Environment } from '@react-three/drei';
 import { EffectComposer, N8AO, TiltShift2 } from '@react-three/postprocessing';
 import COLORS from '@app/constants/color';
+import { MouseContext } from './MouseContext';
 
 const particles = Array.from({ length: 30 }, () => ({
   factor: MathUtils.randInt(20, 100),
@@ -15,6 +16,8 @@ const particles = Array.from({ length: 30 }, () => ({
 }));
 
 export const HeroCanvasAnimation: React.FC = () => {
+  const mousePosition = useContext(MouseContext);
+
   return (
     <Canvas
       shadows
@@ -26,7 +29,8 @@ export const HeroCanvasAnimation: React.FC = () => {
       <fog attach='fog' args={[COLORS.orange, 20, -5]} />
       <ambientLight intensity={1.5} />
       <pointLight position={[10, 10, 10]} intensity={1} castShadow />
-      <Bubbles />
+      <Bubbles mousePosition={mousePosition} />
+
       <EffectComposer disableNormalPass>
         <N8AO aoRadius={6} intensity={20} color={COLORS.orange} />
         <TiltShift2 blur={0.2} />
@@ -36,17 +40,28 @@ export const HeroCanvasAnimation: React.FC = () => {
   );
 };
 
-function Bubbles() {
+interface BubblesProps {
+  mousePosition: { x: number; y: number };
+}
+
+const Bubbles: React.FC<BubblesProps> = ({ mousePosition }) => {
   const ref = useRef<any>();
-  useFrame(
-    (state, delta) =>
-      void (ref.current.rotation.y = MathUtils.damp(
+
+  useFrame(() => {
+    if (ref.current) {
+      // Convert window coordinates to [-1, 1] range for both axes
+      const x = (mousePosition.x / window.innerWidth) * 2 - 1;
+      const y = -(mousePosition.y / window.innerHeight) * 2 + 1;
+
+      ref.current.rotation.y = MathUtils.damp(
         ref.current.rotation.y,
-        (-state.mouse.x * Math.PI) / 6,
+        (-x * Math.PI) / 6,
         2.75,
-        delta
-      ))
-  );
+        0.01
+      );
+    }
+  });
+
   return (
     <Instances
       limit={particles.length}
@@ -62,7 +77,7 @@ function Bubbles() {
       ))}
     </Instances>
   );
-}
+};
 
 interface BubbleProps {
   factor: number;

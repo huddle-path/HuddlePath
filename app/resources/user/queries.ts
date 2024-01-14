@@ -1,7 +1,7 @@
 import { DURATIONS } from '@app/constants/general';
 import { IHttpResponse } from '@app/handlers/api-response/types';
 import { QueryFunctionContext, UseQueryOptions, useQuery } from 'react-query';
-import { IUser, USER_ROLES_TYPE } from '../user/types';
+import { IUser } from '../user/types';
 import { apiHttp } from '@lib/axiosConfig';
 
 export const userQueryKeys = {
@@ -54,7 +54,6 @@ export const useGetUser = <SelectReturnType = IUser, ErrorType = unknown>(
     ReturnType<(typeof userQueryKeys)['user']>
   >(userQueryKeys.user(userId), fetchUser, {
     staleTime: DURATIONS.fifteenMins,
-    suspense: true,
     ...options,
   });
 };
@@ -77,7 +76,6 @@ export const useGetLoggedInUser = <
     ReturnType<(typeof userQueryKeys)['me']>
   >(userQueryKeys.me(), fetchLoggedInUser, {
     staleTime: DURATIONS.fifteenMins,
-    suspense: true,
     ...options,
   });
 };

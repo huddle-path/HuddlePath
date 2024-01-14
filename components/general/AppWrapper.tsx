@@ -12,10 +12,20 @@ const AppWrapper: React.FC<{ children?: ReactNode }> = ({ children }) => {
   const session = useSession();
   const pathName = usePathname();
 
+  const publicPageList = useMemo(() => {
+    const locales = LOCALES.map((locale) => [
+      `/${locale}`,
+      `/${locale}${NAVIGATION.SIGN_IN}`,
+      `/${locale}${NAVIGATION.EXPLORE_EVENTS}`,
+      `${NAVIGATION.EXPLORE_EVENTS}`,
+      `${NAVIGATION.SIGN_IN}`,
+    ]);
+
+    return locales.flatMap((l) => l);
+  }, []);
+
   const isPublicPage = useMemo(() => {
-    return LOCALES.find((locale) =>
-      [`/${locale}`, `/${NAVIGATION.EXPLORE_EVENTS}`].includes(pathName)
-    );
+    return publicPageList.includes(pathName);
   }, [pathName]);
 
   return (

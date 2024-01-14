@@ -1,8 +1,11 @@
 import { Skeleton } from '@components/ui/skeleton';
 
-const EventSkeleton = () => {
+const EventSkeleton = ({ ...props }) => {
   return (
-    <div className='flex flex-col gap-4 pb-4 min-w-80 max-w-80 bg-white'>
+    <div
+      {...props}
+      className='flex flex-col gap-4 pb-4 min-w-80 max-w-80 bg-white'
+    >
       <Skeleton className='w-[300px] h-[200px]' />
 
       <div className='flex flex-col gap-2'>
