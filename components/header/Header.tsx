@@ -3,8 +3,8 @@ import React from 'react';
 import Link from 'next/link';
 import NAVIGATION from '@app/constants/navigation';
 import { TbArrowUpRight } from 'react-icons/tb';
-import { useTranslations } from 'next-intl';
 import Logo from '@components/Logo/Logo';
+import { useTranslations } from 'next-intl';
 
 export const Header = () => {
   const t = useTranslations('header');
@@ -15,11 +15,11 @@ export const Header = () => {
 
       <div className='lg:pr-4'>
         <Link
-          href={NAVIGATION.CREATE_EVENT}
+          href={NAVIGATION.MY_ACCOUNT}
           className='flex flex-row items-center border px-4 py-2'
         >
           <TbArrowUpRight className='text-huddlepath-orange font-bold' />
-          <p className='text-sm'>{t('createEvent')}</p>
+          <p className='text-sm'>{t('myAccount')}</p>
         </Link>
       </div>
     </div>

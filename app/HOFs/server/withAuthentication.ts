@@ -17,11 +17,15 @@ const withAuthentication =
       const user = session.user;
       const auth = await AuthModel.findOne({
         email: user?.email,
-      }).populate('user');
+      })
+        .populate('user')
+        .select('-passwordHash');
 
       if (!auth) {
         return apiResponse({ status: 401, message: 'NOT_AUTHORIZED' });
       }
+
+      req.auth = auth;
 
       const activeRole = req.cookies.get('activeRole');
 

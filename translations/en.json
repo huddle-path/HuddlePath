@@ -4,7 +4,10 @@
     "description": "Your innovative networking platform connecting students, educational institutions, and startups."
   },
   "header": {
-    "createEvent": "Create Event"
+    "createEvent": "Create Event",
+    "myAccount": "My Account",
+    "explore": "Explore",
+    "archived": "Archived"
   },
   "home": {
     "whatWeOffer": "Discover what we are",
@@ -53,5 +56,28 @@
   "sidebarMenus": {
     "dashboard": "Dashboard",
     "events": "Events"
+  },
+  "general": {
+    "readyToEngage": "Get ready to engage!",
+    "createEvent": "Create Event",
+    "engagementText": "Here's what's on your horizon.",
+    "submit": "Submit",
+    "eventTitle": "Event Title",
+    "eventDescription": "Event Description",
+    "eventDate": "Event Date",
+    "eventLocation": "Location",
+    "imageUrl": "Image URL",
+    "titleRequired": "Title is required",
+    "descriptionRequired": "Description is required",
+    "dateRequired": "Date is required",
+    "locationRequired": "Location is required",
+    "imageUpload": "Upload an Image",
+    "clickToUpload": "Click to upload",
+    "orDragNDrop": "or drag and drop",
+    "fileUploadConstraintText": " SVG, PNG, JPG or GIF (MAX. 1GB)",
+    "selectDate": "Select a date",
+    "savedSuccessfully": "Save successfully",
+    "eventSavedSuccessfully": "Event has been save successfully",
+    "imageIsRequired": "Please upload an image"
   }
 }

@@ -61,7 +61,6 @@ export default async function RootLayout({
   params: { locale: string };
   session: any;
 }) {
-
   let translations;
 
   try {
@@ -74,9 +73,14 @@ export default async function RootLayout({
     <html
       lang={locale}
       dir={LOCALE_PROPS.find((prop) => prop.locale === locale)?.dir}
+      className='bg-huddlepath-gray'
     >
       <body className={inter.className}>
-        <NextIntlClientProvider locale={locale} messages={translations}>
+        <NextIntlClientProvider
+          timeZone='Asia/Dubai'
+          locale={locale}
+          messages={translations}
+        >
           <NextAuthSessionProvider session={session}>
             <QueryProvider>
               <Suspense fallback={<Loading />}>

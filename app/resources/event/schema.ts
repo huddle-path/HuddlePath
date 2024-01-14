@@ -31,7 +31,16 @@ const Model: Schema<IEvent> = new Schema<IEvent>(
         ref: 'User',
       },
     ],
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true,
+    },
     imageUrl: {
+      type: String,
+      required: true,
+    },
+    tag: {
       type: String,
       required: true,
     },

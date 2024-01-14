@@ -2,7 +2,6 @@ import { AuthOptions } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import AuthModel from '@app/resources/auth/schema';
 import { z } from 'zod';
-import bcrypt from 'bcrypt';
 import NAVIGATION from '@app/constants/navigation';
 import { login, register } from '@app/api/auth/route';
 
@@ -44,15 +43,15 @@ export const authConfig: AuthOptions = {
             })
           );
 
-          console.log(validationErrors);
-
           return null;
         }
 
-        const auth = await AuthModel.findOne({ email: credentials.email });
+        const auth = await AuthModel.findOne({
+          email: parsedCredentials.data.email,
+        });
 
         if (!auth) {
-          const registerAuth = await register(credentials);
+          const registerAuth = await register(parsedCredentials.data);
 
           if (!registerAuth) return null;
 
@@ -63,7 +62,7 @@ export const authConfig: AuthOptions = {
           };
         }
 
-        const loginAuth = await login(credentials);
+        const loginAuth = await login(parsedCredentials.data);
 
         if (!loginAuth) return null;
 

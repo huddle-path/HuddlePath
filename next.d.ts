@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
-import { IAuth } from '@app/models/auths/types';
 import { USER_ROLES_TYPE } from '@app/resources/user/types';
+import { IAuth } from '@app/resources/auth/types';
 
 declare interface NextRequest extends NextRequest {
   /**

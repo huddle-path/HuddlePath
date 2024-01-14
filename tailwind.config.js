@@ -25,6 +25,7 @@ module.exports = {
         'huddlepath-black': '#0A0B0C',
         'huddlepath-orange': '#FB792A',
         'huddlepath-cyan': '#5CBFB0',
+        'huddlepath-gray': '#F4F6FA',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',

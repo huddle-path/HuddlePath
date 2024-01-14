@@ -18,16 +18,16 @@ const AppWrapper: React.FC<{ children?: ReactNode }> = ({ children }) => {
     );
   }, [pathName]);
 
-  console.log(pathName);
-
   return (
-    <div className='flex flex-row w-full'>
+    <div className='flex flex-row w-full bg-huddlepath-gray h-full'>
       {session.data && !isPublicPage && (
-        <div className='hidden md:block'>
+        <div className='hidden md:block fixed'>
           <SideBar />
         </div>
       )}
-      <div className={`w-full h-screen`}>{children}</div>
+      <div className={`w-full h-full ${!isPublicPage ? 'md:ml-20' : ''}`}>
+        {children}
+      </div>
     </div>
   );
 };
