@@ -32,6 +32,6 @@ const getEvent = async (
   }
 };
 
-const GET = withDbConnection(withAuthentication(getEvent));
+const GET = withDbConnection(getEvent);
 
 export { GET };
