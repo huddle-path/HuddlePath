@@ -8,6 +8,7 @@ import {
   PopoverTrigger,
 } from '@components/ui/popover';
 import { signOut } from 'next-auth/react';
+import Image from 'next/image';
 import { useMemo } from 'react';
 
 const MiniProfileCard = () => {
@@ -31,9 +32,12 @@ const MiniProfileCard = () => {
         </PopoverTrigger>
         <PopoverContent className='m-4 max-w-52'>
           <div className='flex flex-col items-center'>
-            <img
+            <Image
               className='w-24 h-24 mb-3 rounded-full shadow-lg border-2 border-huddlepath-cyan'
               src='https://github.com/shadcn.png'
+              width={10}
+              height={10}
+              alt=''
             />
             <h5 className='mb-1 text-xl font-medium text-gray-900'>
               Israel Ayokunnu

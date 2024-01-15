@@ -3,7 +3,7 @@ import Credentials from 'next-auth/providers/credentials';
 import AuthModel from '@app/resources/auth/schema';
 import { z } from 'zod';
 import NAVIGATION from '@app/constants/navigation';
-import { login, register } from '@app/api/auth/route';
+import { login, register } from '@app/resources/auth/helper';
 
 export const authConfig: AuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -71,8 +71,6 @@ export const authConfig: AuthOptions = {
           email: loginAuth.email,
           id: loginAuth._id,
         };
-
-        return null;
       },
     }),
   ],

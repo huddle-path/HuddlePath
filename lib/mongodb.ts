@@ -5,20 +5,14 @@ type MongooseCache = {
   promise: Promise<typeof mongoose> | null;
 };
 
-declare global {
-  namespace NodeJS {
-    interface Global {
-      mongoose: MongooseCache;
-    }
-  }
-}
+const globalThat = global as any;
 
-if (!global.mongoose) {
-  global.mongoose = { conn: null, promise: null };
+if (!globalThat.mongoose) {
+  globalThat.mongoose = { conn: null, promise: null };
 }
 
 async function dbConnect(): Promise<typeof mongoose> {
-  const cached = global.mongoose;
+  const cached = globalThat.mongoose;
 
   if (cached.conn && cached.conn.readyState === 1) {
     // If connection is ready, just return it

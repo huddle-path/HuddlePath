@@ -1,4 +1,4 @@
-import { register, login } from '@app/api/auth/route';
+import { register, login } from '@app/resources/auth/helper';
 import UserModel from '@app/resources/user/schema';
 import AuthModel from '@app/resources/auth/schema';
 import bcrypt from 'bcrypt';

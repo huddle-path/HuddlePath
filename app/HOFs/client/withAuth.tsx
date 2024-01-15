@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 function withAuth(Component: ComponentType) {
-  return function ProtectedRoute(props: React.JSX.IntrinsicAttributes) {
+  return function ProtectedRoute(props: any) {
     const { data, status } = useSession();
 
     const router = useRouter();

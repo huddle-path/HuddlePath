@@ -1,6 +1,6 @@
-import { GET as getAuthenticatedUser } from '@app/api/users/me/route';
 import UserModel from '@app/resources/user/schema';
 import { apiResponse } from '@app/handlers/api-response/response-handler';
+import { GET as getAuthenticatedUser } from '@app/api/users/me/route';
 
 jest.mock('@app/resources/user/schema');
 jest.mock('@app/handlers/api-response/response-handler');

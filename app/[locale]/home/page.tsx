@@ -19,7 +19,7 @@ const Home = () => {
           </div>
 
           <div className='w-full p-6 sticky top-0 z-50'>
-            <Header />
+            <Header useBlack={false} />
           </div>
 
           <div className='relative w-full h-full'>
