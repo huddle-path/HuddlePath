@@ -6,8 +6,11 @@ import './home.css';
 import { WhoWeAre } from '@components/who-we-are/WhoWeAre';
 import { ExploreEvents } from '@components/explore-events/ExploreEvents';
 import { MouseProvider } from '@components/hero-canvas-animation/MouseContext';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 const Home = () => {
+  unstable_setRequestLocale('en');
+
   const t = useTranslations('home');
   const general = useTranslations('general');
   return (

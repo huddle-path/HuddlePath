@@ -10,6 +10,7 @@ import QueryProvider from '@utils/providers/react-query-provider';
 import Loading from './Loading';
 import { Toaster } from '@components/ui/toaster';
 import AppWrapper from '@components/general/AppWrapper';
+import { unstable_setRequestLocale } from 'next-intl/server';
 
 const inter = Inter({
   subsets: ['cyrillic', 'cyrillic-ext', 'latin', 'latin-ext', 'vietnamese'],
@@ -61,6 +62,8 @@ export default async function RootLayout({
   params: { locale: string };
   session: any;
 }) {
+  unstable_setRequestLocale(locale);
+
   let translations;
 
   try {
