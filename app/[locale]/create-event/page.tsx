@@ -10,6 +10,7 @@ import { Input } from '@components/ui/input';
 import { Textarea } from '@components/ui/textarea';
 import { toast } from '@components/ui/use-toast';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -19,7 +20,6 @@ const CreateEvent = () => {
   const { push } = useRouter();
   const t = useTranslations('general');
   const headerT = useTranslations('header');
-
   const translationErrors = useTranslations('errors');
   const [imagePreview, setImagePreview] = useState<string>();
   const [imageSelected, setImageSelected] = useState<boolean>(true);
@@ -90,7 +90,9 @@ const CreateEvent = () => {
 
       <div className='container mx-auto p-4 h-full max-w-screen-md'>
         <div className='flex flex-row text-sm gap-4 mb-4'>
-          <Link href={NAVIGATION.DASHBOARD} className='hover:underline'>{headerT('myAccount')}</Link>
+          <Link href={NAVIGATION.DASHBOARD} className='hover:underline'>
+            {headerT('myAccount')}
+          </Link>
           <p>/</p>
           <p>{headerT('createEvent')}</p>
         </div>
@@ -185,10 +187,12 @@ const CreateEvent = () => {
                 </div>
               )}
               {imagePreview && (
-                <img
-                  src={imagePreview}
+                <Image
+                  src={decodeURI(imagePreview)}
                   alt='Uploaded Event'
                   className='w-full h-full object-cover rounded-lg'
+                  width={60}
+                  height={60}
                 />
               )}
               <input

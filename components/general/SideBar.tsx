@@ -1,23 +1,10 @@
 'use client';
-import { useTranslations } from 'next-intl';
-import { useMemo } from 'react';
 import Logo from '@components/Logo/Logo';
-import { useGetActiveRole } from '@app/resources/auth/queries';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { useGetLoggedInUser } from '@app/resources/user/queries';
+import MiniProfileCard from './MiniProfileCard';
+import { IoMdNotificationsOutline } from 'react-icons/io';
+import { RiSettingsFill } from 'react-icons/ri';
 
 const SideBar = () => {
-  const { data: loggedInUserResponse } = useGetLoggedInUser();
-  const t = useTranslations('sidebarMenus');
-  const { data: activeRoleResponse } = useGetActiveRole();
-
-  const activeRole = useMemo(() => {
-    return activeRoleResponse;
-  }, [activeRoleResponse]);
-
-  const loggedInUser = useMemo(() => {
-    return loggedInUserResponse;
-  }, [loggedInUserResponse]);
   return (
     <div
       style={{ transition: 'width 0.1s ease-out' }}
@@ -28,14 +15,11 @@ const SideBar = () => {
           <Logo logoOnly useBlackLogo />
         </div>
 
-        <div className='flex justify-center p-4'>
-          <Avatar>
-            <AvatarImage src='https://github.com/shadcn.png' />
-            <AvatarFallback>
-              {loggedInUser?.firstName?.charAt(0)}
-              {loggedInUser?.lastName?.charAt(0)}
-            </AvatarFallback>
-          </Avatar>
+        <div className='flex justify-center p-4 flex-col items-center gap-8'>
+          <IoMdNotificationsOutline className=' h-7 w-7 text-gray-400' />
+          <RiSettingsFill className=' h-6 w-6 text-gray-400' />
+
+          <MiniProfileCard />
         </div>
       </div>
     </div>
