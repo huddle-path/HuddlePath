@@ -18,7 +18,7 @@ Welcome to Huddlepath, the innovative networking platform that connects students
 
 ## Getting Started
 To start using Huddlepath:
-1. Visit [huddlepath.com](#) (Link will be active soon)
+1. Visit [https://huddle-path.vercel.app](#) (Link will be active soon)
 2. Register as a student, educator, or startup.
 3. Explore events and join sessions that interest you.
 
