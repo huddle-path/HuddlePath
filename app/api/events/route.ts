@@ -7,7 +7,18 @@ import EventModel from '@app/resources/event/schema';
 import { NextRequest } from '@next';
 import { IEvent, TEventQuery } from '@app/resources/event/types';
 import { IQuery } from '@app/handlers/api-response/types';
-import { splitHelperAndObjectify } from '@lib/utils';
+import mongoose from 'mongoose';
+
+const splitHelperAndObjectify = (property: string) => {
+  const ids: any = property.split(',');
+  ids.forEach((program: string, index: number) => {
+    ids[index] = new mongoose.Types.ObjectId(program);
+  });
+
+  return {
+    $in: ids,
+  };
+};
 
 const eventFormatter = (query: IQuery<TEventQuery>) => {
   const filter: any = {};
@@ -34,7 +45,7 @@ const eventFormatter = (query: IQuery<TEventQuery>) => {
 
 const getAllEvents = async (req: NextRequest, res: NextResponse) => {
   const queryParams = Object.fromEntries(
-    req.nextUrl.searchParams
+    new URL(req.nextUrl).searchParams
   ) as unknown as IQuery<TEventQuery>;
 
   const query: IQuery<TEventQuery> = {

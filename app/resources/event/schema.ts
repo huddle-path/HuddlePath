@@ -12,7 +12,7 @@ const Model: Schema<IEvent> = new Schema<IEvent>(
       required: true,
     },
     date: {
-      type: Date,
+      type: String,
       required: true,
     },
     location: {

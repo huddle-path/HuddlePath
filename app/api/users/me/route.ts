@@ -5,7 +5,10 @@ import { NextResponse } from 'next/server';
 import { NextRequest } from '@next';
 import UserModel from '@app/resources/user/schema';
 
-const getAuthenticatedUser = async (req: NextRequest, res: NextResponse) => {
+export const getAuthenticatedUser = async (
+  req: NextRequest,
+  res: NextResponse
+) => {
   const user = await UserModel.findOne({ _id: req.auth.user._id })
     .select('-passwordHash')
     .lean();

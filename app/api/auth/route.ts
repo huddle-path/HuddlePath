@@ -1,14 +1,8 @@
-import { apiResponse } from '@app/handlers/api-response/response-handler';
-import withDbConnection from '@app/HOFs/server/withDbConnection';
 import AuthModel from '@app/resources/auth/schema';
 import { ICredentials } from '@app/resources/auth/types';
-import { NextRequest } from '@next';
-import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import UserModel from '@app/resources/user/schema';
 import { USER_ROLES } from '@app/resources/user/constants';
-import { createToken } from '@app/handlers/token/handlers';
-import { TokenActionTypes } from '@app/handlers/token/constants';
 
 export const register = async ({ email, password }: ICredentials) => {
   try {
