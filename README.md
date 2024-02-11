@@ -25,15 +25,11 @@ To start using Huddlepath:
 ## Getting the Code
 To get started with the Huddlepath codebase, follow these steps:
 
-### Prerequisites
-- Make sure you have Node.js and npm installed on your system.
-- A working knowledge of React and Next.js is beneficial for understanding the codebase.
-
 ### Cloning the Repository
 To get started with the Huddlepath codebase, you can clone the repository to your local machine using the following Git command:
 
 ```sh
-git clone https://github.com/your-username/huddlepath.git
+git clone https://github.com/huddle-path/HuddlePath.git
 ```
 
 ```sh
